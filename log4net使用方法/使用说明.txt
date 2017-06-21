@@ -1,0 +1,8 @@
+1 引用log4net.dll
+2 把App.config 复制到程序集里面
+3 在使用这个的命名空间上复制 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
+4 ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+  log.Error("error", ex);
+  log.Info(msg);
+
+  
