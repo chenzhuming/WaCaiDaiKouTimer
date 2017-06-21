@@ -1,0 +1,10 @@
+D:\DEMO\WindowsTimeService\WindowsTimeService\bin\Debug\timer.xml
+D:\DEMO\WindowsTimeService\WindowsTimeService\bin\Debug\WindowsTimeService.exe.config
+D:\DEMO\WindowsTimeService\WindowsTimeService\bin\Debug\WindowsTimeService.exe
+D:\DEMO\WindowsTimeService\WindowsTimeService\bin\Debug\WindowsTimeService.pdb
+D:\DEMO\WindowsTimeService\WindowsTimeService\bin\Debug\log4net.dll
+D:\DEMO\WindowsTimeService\WindowsTimeService\bin\Debug\Newtonsoft.Json.dll
+D:\DEMO\WindowsTimeService\WindowsTimeService\obj\Debug\WindowsTimeService.ProjectInstaller.resources
+D:\DEMO\WindowsTimeService\WindowsTimeService\obj\Debug\WindowsTimeService.csproj.GenerateResource.Cache
+D:\DEMO\WindowsTimeService\WindowsTimeService\obj\Debug\WindowsTimeService.exe
+D:\DEMO\WindowsTimeService\WindowsTimeService\obj\Debug\WindowsTimeService.pdb
