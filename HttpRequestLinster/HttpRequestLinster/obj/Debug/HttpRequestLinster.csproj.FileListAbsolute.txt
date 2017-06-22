@@ -1,7 +1,0 @@
-D:\DEMO\HttpRequestLinster\HttpRequestLinster\bin\Debug\HttpRequestLinster.exe.config
-D:\DEMO\HttpRequestLinster\HttpRequestLinster\obj\Debug\HttpRequestLinster.csprojResolveAssemblyReference.cache
-D:\DEMO\HttpRequestLinster\HttpRequestLinster\bin\Debug\HttpRequestLinster.exe
-D:\DEMO\HttpRequestLinster\HttpRequestLinster\bin\Debug\HttpRequestLinster.pdb
-D:\DEMO\HttpRequestLinster\HttpRequestLinster\obj\Debug\HttpRequestLinster.exe
-D:\DEMO\HttpRequestLinster\HttpRequestLinster\obj\Debug\HttpRequestLinster.pdb
-D:\DEMO\HttpRequestLinster\HttpRequestLinster\bin\Debug\Newtonsoft.Json.dll
