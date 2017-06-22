@@ -4,5 +4,6 @@
 4 ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
   log.Error("error", ex);
   log.Info(msg);
+5 
 
   
