@@ -8,3 +8,7 @@ D:\DEMO\git\HttpRequestLisener\HttpRequestLinster\obj\Debug\HttpRequestLinster.p
 D:\DEMO\git\HttpRequestLisener\HttpRequestListener\bin\Debug\HttpRequestLinster.exe.config
 D:\DEMO\git\HttpRequestLisener\HttpRequestListener\obj\Debug\HttpRequestLinster.exe
 D:\DEMO\git\HttpRequestLisener\HttpRequestListener\obj\Debug\HttpRequestLinster.pdb
+D:\DEMO\git\HttpRequestLisener\HttpRequestListener\bin\Debug\HttpRequestLinster.exe
+D:\DEMO\git\HttpRequestLisener\HttpRequestListener\bin\Debug\HttpRequestLinster.pdb
+D:\DEMO\git\HttpRequestLisener\HttpRequestListener\bin\Debug\Newtonsoft.Json.dll
+D:\DEMO\git\HttpRequestLisener\HttpRequestListener\obj\Debug\HttpRequestListener.csprojResolveAssemblyReference.cache

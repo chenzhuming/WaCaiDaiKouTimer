@@ -14,6 +14,7 @@ namespace HttpRequestListener
 {
     class Program
     {
+        //static int a = 1;
         static System.Timers.Timer timer2;  //计时器
         static List<Param> objList = new List<Param>();
         static void Main(string[] args)
@@ -29,7 +30,7 @@ namespace HttpRequestListener
                 try
                 {
                     listerner.AuthenticationSchemes = AuthenticationSchemes.Anonymous;//指定身份验证 Anonymous匿名访问
-                    listerner.Prefixes.Add("http://127.0.0.1:1500/Service/");
+                    listerner.Prefixes.Add("http://localhost:1500/TimeService/");
                     listerner.Start();
                 }
                 catch (Exception ex)
@@ -74,17 +75,18 @@ namespace HttpRequestListener
             System.IO.StreamReader reader = new System.IO.StreamReader(stream, Encoding.UTF8);
             String body = reader.ReadToEnd();
             Console.WriteLine("收到POST数据:" + HttpUtility.UrlDecode(body));
-           
+
 
             Param objParam = new Param();
             objParam.Hour = HttpUtility.ParseQueryString(body).Get("Hour");
             objParam.Minute = HttpUtility.ParseQueryString(body).Get("Minute");
             objParam.Url = HttpUtility.ParseQueryString(body).Get("Url");
+            objParam.AppId = HttpUtility.ParseQueryString(body).Get("AppId");
             objList.Add(objParam);
 
             using (StreamWriter writer = new StreamWriter(ctx.Response.OutputStream, Encoding.UTF8))
             {
-                writer.Write("{type=1}");
+                writer.Write("{\"type\"=\"1\"}");
                 writer.Close();
                 ctx.Response.Close();
             }
@@ -125,31 +127,36 @@ namespace HttpRequestListener
                 int intMinute = e.SignalTime.Minute;
                 int intSecond = e.SignalTime.Second;
                 string result = "";
-                if (objList != null&&objList.Count>0)
+                if (objList != null && objList.Count > 0)
                 {
-                    for(int i = 0; i < objList.Count; i++)
+                    for (int i = 0; i < objList.Count; i++)
                     {
                         Param p = objList[i];
-                        if (intHour == int.Parse(p.Hour) && intMinute == int.Parse(p.Minute) && intSecond == 0)
+                        if (intHour == int.Parse(p.Hour) && intMinute == int.Parse(p.Minute))
                         {
-                            InterfaceHelper.RequestService(p.Url, "", ref result);
+                            Dictionary<string, string> dic = new Dictionary<string, string>();
+                            dic.Add("AppId", p.AppId);
+                            InterfaceHelper.RequestService(p.Url, dic, ref result);
                             Console.WriteLine("调用: " + p.Url);
                             Console.WriteLine("返回:" + result);
-                            objList.RemoveAt(i);
+                           
+                            objList.Remove(p);
+                            Console.WriteLine(objList.Count);
                         }
                     }
-                    //foreach (var item in objList)
-                    //{
-                    //    Param p = item as Param;
-                    //    if (intHour == int.Parse(p.Hour) && intMinute == int.Parse(p.Minute) && intSecond == 0)
-                    //    {
-                    //        InterfaceHelper.RequestService(p.Url, "", ref result);
-                    //        Console.WriteLine("调用: " + p.Url);
-                    //        Console.WriteLine("返回:" + result);
-                    //        objList.Remove(item);
-                    //    }
-                    //}
+                    //清楚集合中废数据
+                    for (int i = 0; i < objList.Count; i++)
+                    {
+                        Param p = objList[i];
+                        if (intHour > int.Parse(p.Hour))
+                        {
+                            objList.RemoveAt(i);
+                            Console.WriteLine("作废:" + p.Hour + ":" + p.Minute + " " + p.Url);
+                        }
+                    }
                 }
+
+
             }
             catch (Exception ex)
             {
@@ -167,6 +174,7 @@ namespace HttpRequestListener
         public string Hour { get; set; }
         public string Minute { get; set; }
         public string Url { get; set; }
+        public string AppId { get; set; }
     }
 
     public class InterfaceHelper
@@ -178,7 +186,7 @@ namespace HttpRequestListener
         /// <param name="strPara">传入参数</param>
         /// <param name="strResult">返回的json串</param>
         /// <returns>请求是否成功，1成功，0不成功</returns>
-        public static int RequestService(string strUri, string strPara, ref string strResult)
+        public static int RequestService(string strUri, Dictionary<string, string> dic, ref string strResult)
         {
             int intResult = 1;
             string message = string.Empty;
@@ -191,10 +199,21 @@ namespace HttpRequestListener
 
                 myRequest.ContentType = "application/x-www-form-urlencoded";
                 //myRequest.ContentType = "application/json; charset=utf-8";
-                string paraUrlCoded = strPara;
+                //string paraUrlCoded = strPara;
                 byte[] payload;
-                //将URL编码后的字符串转化为字节
-                payload = System.Text.Encoding.GetEncoding("utf-8").GetBytes(paraUrlCoded);
+                ////将URL编码后的字符串转化为字节
+                //payload = System.Text.Encoding.GetEncoding("utf-8").GetBytes(paraUrlCoded);
+                StringBuilder builder = new StringBuilder();
+                int i = 0;
+                foreach (var item in dic)
+                {
+                    if (i > 0)
+                        builder.Append("&");
+                    builder.AppendFormat("{0}={1}", item.Key, item.Value);
+                    i++;
+                }
+                payload = Encoding.UTF8.GetBytes(builder.ToString());
+
                 //设置请求的 ContentLength 
                 myRequest.ContentLength = payload.Length;
                 //获得请求流
