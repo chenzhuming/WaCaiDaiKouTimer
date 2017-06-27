@@ -14,7 +14,7 @@ namespace HttpRequestListener
 {
     class Program
     {
-        //static int a = 1;
+        static int a = 1;
         static System.Timers.Timer timer2;  //计时器
         static List<Param> objList = new List<Param>();
         static void Main(string[] args)
@@ -134,14 +134,16 @@ namespace HttpRequestListener
                         Param p = objList[i];
                         if (intHour == int.Parse(p.Hour) && intMinute == int.Parse(p.Minute))
                         {
+                            objList.Remove(p);
                             Dictionary<string, string> dic = new Dictionary<string, string>();
                             dic.Add("AppId", p.AppId);
                             InterfaceHelper.RequestService(p.Url, dic, ref result);
+                            dic = new Dictionary<string, string>();
                             Console.WriteLine("调用: " + p.Url);
                             Console.WriteLine("返回:" + result);
                            
-                            objList.Remove(p);
-                            Console.WriteLine(objList.Count);
+                            
+                            Console.WriteLine(a++);
                         }
                     }
                     //清楚集合中废数据
