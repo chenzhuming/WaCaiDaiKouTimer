@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Paramlist>
+  <Param hour="15" minute="30" url="http://localhost/osce/index.php/home//CommonEntity/setUserAppType"/>
+  <Param hour="16" minute="00" url="http://localhost/osce/index.php/home//CommonEntity/setUserAppType"/>
+</Paramlist>
